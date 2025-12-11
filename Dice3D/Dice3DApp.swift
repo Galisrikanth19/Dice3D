@@ -25,7 +25,7 @@ struct RootView: View {
                 LaunchScreenView()
                     .transition(.opacity)
             } else {
-                BoardView()
+                WelcomeView()
                     .transition(.opacity)
             }
         }

@@ -21,6 +21,7 @@
 		2D98F37D2EEAA65F00C60A05 /* run_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D98F37B2EEAA65F00C60A05 /* run_sound.mp3 */; };
 		2D98F37E2EEAA65F00C60A05 /* snake_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D98F37C2EEAA65F00C60A05 /* snake_sound.mp3 */; };
 		2D98F37F2EEAA65F00C60A05 /* ladder_sound.mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 2D98F37A2EEAA65F00C60A05 /* ladder_sound.mp3 */; };
+		2D98F3812EEB03FD00C60A05 /* WelcomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D98F3802EEB03FD00C60A05 /* WelcomeView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,6 +39,7 @@
 		2D98F37A2EEAA65F00C60A05 /* ladder_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = ladder_sound.mp3; sourceTree = "<group>"; };
 		2D98F37B2EEAA65F00C60A05 /* run_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = run_sound.mp3; sourceTree = "<group>"; };
 		2D98F37C2EEAA65F00C60A05 /* snake_sound.mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = snake_sound.mp3; sourceTree = "<group>"; };
+		2D98F3802EEB03FD00C60A05 /* WelcomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +76,7 @@
 				2D98F3772EEAA45600C60A05 /* support */,
 				2D98F3642EEAA45000C60A05 /* Assets.xcassets */,
 				2D98F3652EEAA45000C60A05 /* BoardView.swift */,
+				2D98F3802EEB03FD00C60A05 /* WelcomeView.swift */,
 				2D98F3692EEAA45000C60A05 /* Dice3DApp.swift */,
 				2D98F36A2EEAA45000C60A05 /* GIFImage.swift */,
 				2D98F36B2EEAA45000C60A05 /* SoundManager.swift */,
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				11909D992EEADD0A00882A0F /* LaunchScreenView.swift in Sources */,
+				2D98F3812EEB03FD00C60A05 /* WelcomeView.swift in Sources */,
 				2D98F3732EEAA45000C60A05 /* BoardView.swift in Sources */,
 				2D98F3742EEAA45000C60A05 /* Dice3DApp.swift in Sources */,
 				2D98F3752EEAA45000C60A05 /* GIFImage.swift in Sources */,

@@ -21,7 +21,10 @@ struct BoardView: View {
     @State private var diceValueP1: Int = 1
     @State private var diceValueP2: Int = 1
     
-    @State private var gameMode: Int = 2
+    //@State private var gameMode: Int = 2
+    let gameMode: Int
+    let player1Name: String
+    let player2Name: String
     // 1 = Single Player, 2 = Two Players
     @State private var currentPlayer: Int = 1
     // 1 = P1, 2 = P2
@@ -86,10 +89,10 @@ struct BoardView: View {
                     GIFImage(name: "celebrate1")
                         .frame(maxWidth: .infinity, maxHeight: .infinity)
                     if positionP1 == 50 {
-                        Text("P1 won buddy!!")
+                        Text("\(player1Name) won the board!!")
                             .font(.largeTitle)
                     } else {
-                        Text("P2 won buddy!!")
+                        Text("\(player2Name) won the board!!")
                             .font(.largeTitle)
                     }
                     
@@ -155,10 +158,10 @@ struct BoardView: View {
             }
             
             HStack {
-                playerView(name: "P1", isTurn: currentPlayer == 1)
+                playerView(name: player1Name, isTurn: currentPlayer == 1)
                 Spacer()
                 if gameMode == 2 {
-                    playerView(name: "P2", isTurn: currentPlayer == 2)
+                    playerView(name: player2Name, isTurn: currentPlayer == 2)
                 }
             }//.border(.red, width: 1.0)
             
@@ -332,7 +335,7 @@ struct BoardView: View {
 
 
 #Preview {
-    BoardView()
+    BoardView(gameMode: 2, player1Name: "qqq", player2Name: "ccc")
 }
 
 extension BoardView {
