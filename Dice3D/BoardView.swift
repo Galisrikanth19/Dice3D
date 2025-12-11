@@ -11,22 +11,20 @@ struct BoardView: View {
     private let columnsCount = 5
     private let rowsCount = 10
     
-  //  @State private var currentPosition: Int = 0
     @State private var diceValue: Int = 1
     @State private var diceRolling: Bool = false
     @State private var isMovingToken: Bool = false
     @State private var showAnimation: Bool = false
-    
-    @State private var currentPlayer: Int = 1   // 1 = P1, 2 = P2
     
     @State private var positionP1: Int = 0
     @State private var positionP2: Int = 0
     @State private var diceValueP1: Int = 1
     @State private var diceValueP2: Int = 1
     
-    var currentPosition: Int {
-        return currentPlayer == 1 ? positionP1 : positionP2
-    }
+    @State private var gameMode: Int = 2
+    // 1 = Single Player, 2 = Two Players
+    @State private var currentPlayer: Int = 1
+    // 1 = P1, 2 = P2
     
     var isReversedAnimationP1: Bool {
         if positionP1 < 6 ||
@@ -68,15 +66,15 @@ struct BoardView: View {
         }
         return result
     }
-
+    
     
     private var columns: [GridItem] {
         Array(repeating: GridItem(.flexible(), spacing: 4), count: columnsCount)
     }
     
-
-   
-        
+    
+    
+    
     var body: some View {
         mainView
     }
@@ -115,7 +113,7 @@ struct BoardView: View {
                     snake19_10
                     snake16_2
                 }.offset(y: -16)
-                .zIndex(-1)
+                    .zIndex(-1)
                 
                 Group {
                     ladder40_48
@@ -124,11 +122,11 @@ struct BoardView: View {
                     ladder17_31
                     ladder3_15
                 }.offset(y: -16)
-                .zIndex(-1)
+                    .zIndex(-1)
                 
-
-               // .opacity(0.37)
-                    
+                
+                // .opacity(0.37)
+                
             }
             
             
@@ -136,10 +134,10 @@ struct BoardView: View {
         }
     }
     
-   
+    
     var contentView: some View {
         VStack(spacing: 20) {
-          //  Spacer()
+            //  Spacer()
             // Grid
             LazyVGrid(columns: columns, spacing: 4) {
                 ForEach(boardNumbers, id: \.self) { number in
@@ -155,27 +153,31 @@ struct BoardView: View {
                     
                 }
             }
-            // animate highlight change when currentPosition changes
-            .animation(.easeInOut(duration: 0.6), value: currentPosition)
             
-          
-            
-            Divider().background(.white)
             HStack {
                 playerView(name: "P1", isTurn: currentPlayer == 1)
                 Spacer()
-                playerView(name: "P2", isTurn: currentPlayer == 2)
+                if gameMode == 2 {
+                    playerView(name: "P2", isTurn: currentPlayer == 2)
+                }
             }//.border(.red, width: 1.0)
             
+            
             HStack {
-                if currentPlayer == 1 {
-                    diceView
+                if gameMode == 2 { // chaitra
+                    diceView1
+                        .allowsHitTesting(currentPlayer == 1)
+                        .opacity(currentPlayer == 1 ? 1 : 0.2)
                     Spacer()
+                    diceView2
+                        .allowsHitTesting(currentPlayer == 2)
+                        .opacity(currentPlayer == 2 ? 1 : 0.2)
                 } else {
+                    diceView1
                     Spacer()
-                    diceView
                 }
-            }.background(.yellow.opacity(0.3))
+                
+            }.background(.green.opacity(0.2))
             Spacer()
         }
     }
@@ -190,60 +192,65 @@ struct BoardView: View {
                 .scaledToFit()
                 .frame(width: 36, height: 36)
         }.padding()
-        .background(
-            RoundedRectangle(cornerRadius: 8)
-                .fill(isTurn ? .green : .gray)
-        )
+            .background(
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(isTurn ? .green : .gray)
+            )
     }
     
-    var diceView: some View {
+    var diceView1: some View {
         ZStack {
-            if currentPlayer == 1 {
-                if diceRolling {
-                    GIFImage(name: "dice3d")
-                        .frame(width: 84, height: 84)
-                        .scaleEffect(x: -1, y: 1)
-                } else {
-                    if positionP1 == 0 {
-                        Button("START", action: {
-                            rollDice()
-                        }).foregroundStyle(.primary)
+            if currentPlayer == 1 && diceRolling {
+                GIFImage(name: "dice3d")
+                    .frame(width: 84, height: 84)
+                    .scaleEffect(x: -1, y: 1)
+            } else {
+                
+                if positionP1 == 0 {
+                    Button("START", action: {
+                        rollDice()
+                    }).foregroundStyle(.primary)
                         .padding(.leading)
-                    } else {
-                        Image("dice\(diceValueP1)")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 58, height: 58)
-                            .opacity(diceRolling ? 0 : 1.0)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                rollDice()
-                            }
-                    }
+                }
+                else {
+                    Image("dice\(diceValueP1)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 58, height: 58)
+                       // .opacity(diceRolling ? 0 : 1.0)
+                        .cornerRadius(8)
+                        .onTapGesture {
+                            rollDice()
+                        }
                 }
             }
-            else {
-                if diceRolling {
-                    GIFImage(name: "dice3d")
-                        .frame(width: 84, height: 84)
-                        .scaleEffect(x: -1, y: 1)
-                } else {
-                    if positionP2 == 0 {
-                        Button("START", action: {
-                            rollDice()
-                        }).foregroundStyle(.primary)
+        }
+        .frame(width: 68, height: 68)
+    }
+    
+    var diceView2: some View {
+        ZStack {
+            if currentPlayer == 2 && diceRolling {
+                GIFImage(name: "dice3d")
+                    .frame(width: 84, height: 84)
+                    .scaleEffect(x: -1, y: 1)
+            } else {
+                
+                if positionP2 == 0 {
+                    Button("START", action: {
+                        rollDice()
+                    }).foregroundStyle(.primary)
                         .padding(.trailing)
-                    } else {
-                        Image("dice\(diceValueP2)")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 58, height: 58)
-                            .opacity(diceRolling ? 0 : 1.0)
-                            .cornerRadius(8)
-                            .onTapGesture {
-                                rollDice()
-                            }
-                    }
+                }
+                else {
+                    Image("dice\(diceValueP2)")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 58, height: 58)
+                        .cornerRadius(8)
+                        .onTapGesture {
+                            rollDice()
+                        }
                 }
             }
         }
@@ -257,7 +264,7 @@ struct BoardView: View {
                 .background(
                     RoundedRectangle(cornerRadius: 8)
                         .fill(number%2 == 0 ? .green.opacity(0.2) :  .yellow.opacity(0.2))
-                       
+                    
                 )
             
             Text("\(number)")
@@ -267,41 +274,45 @@ struct BoardView: View {
             
             // P1 token
             if positionP1 == number {
-                if showAnimation && isCurrent {
+                if showAnimation && isCurrent && currentPlayer == 1 {
                     GIFImage(name: "walking")
                         .frame(width: 48, height: 48)
                         .scaleEffect(x: isReversedAnimationP1 ? -1 : 1, y: 1)
                         .zIndex(1)
                 }
                 else {
-                    Image("standing")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: isCurrent ? 40 : 22, height: isCurrent ? 40 : 22)
-                        .scaleEffect(x: isReversedAnimationP1 ? -1 : 1, y: 1)
-                        .zIndex(1)
+                    VStack {
+                        Image("standing")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: isCurrent ? 40 : 22, height: isCurrent ? 40 : 22)
+                            .scaleEffect(x: isReversedAnimationP1 ? -1 : 1, y: 1)
+                            .zIndex(1)
+                    }
                 }
             }
             
-            // P2 token
-            if positionP2 == number {
-                if showAnimation && isCurrent {
+            // P2 token should show ONLY in two-player mode
+            if gameMode == 2 && positionP2 == number  {
+                if showAnimation && isCurrent && currentPlayer == 2 {
                     GIFImage(name: "walking")
                         .frame(width: 48, height: 48)
                         .scaleEffect(x: isReversedAnimationP2 ? -1 : 1, y: 1)
                         .zIndex(1)
                 } else {
-                    Image("standing")
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: isCurrent ? 40 : 22, height: isCurrent ? 40 : 22)
-                        .scaleEffect(x: isReversedAnimationP2 ? -1 : 1, y: 1)
-                        .zIndex(1)
+                    VStack {
+                        Image("standing")
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: isCurrent ? 40 : 22, height: isCurrent ? 40 : 22)
+                            .scaleEffect(x: isReversedAnimationP2 ? -1 : 1, y: 1)
+                            .zIndex(1)
+                    }
                 }
             }
         }.frame(height: 52)
     }
-
+    
     /// snakes & ladders: head → tail, bottom → top
     let getMovingCells: [Int : [Int]] = [ // trilok
         3:[3,7,15],
@@ -443,10 +454,17 @@ extension BoardView {
             return
         }
         
-        // Switch player
+        
+        // SINGLE PLAYER → Do NOT switch player
+        if gameMode == 1 {
+            currentPlayer = 1
+            return
+        }
+        
+        // TWO PLAYER → normal switching
         currentPlayer = (currentPlayer == 1) ? 2 : 1
     }
-
+    
     var snake47_39: some View {
         Group {
             Image("snake")
@@ -555,5 +573,5 @@ extension BoardView {
         }
     }
     
-
+    
 }
